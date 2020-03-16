@@ -1,0 +1,36 @@
+# Rebekah Brouillette
+# Module 9 Code
+
+# read in data 
+data <- read.csv("Salaries.csv")
+
+# load packages
+library(dplyr)
+library(tidyr)
+
+
+# Filter data by gender using dplyr package
+sortdata <- ddply(data, "sex", transform)
+fprof <- sortdata[1:39,]
+mprof <- sortdata[-(1:39),]
+
+# Histogram of female and male professor salary
+hist(fprof$salary)
+hist(mprof$salary)
+
+# Bar plot on professor salary
+barplot(sortdata$salary)
+
+# Pie chart on professor rank
+# sort data again
+sortdata <- ddply(data, "rank", transform)
+rank <- c("Associate Professor", "Assistant Professor", "Professor")
+assoc <- sortdata[1:64,]
+assist <- sortdata[65:131,]
+prof <- sortdata[-(1:131),]
+
+# Pie data is count of assoc, assist, and prof data sets
+piedata <- c(64, 67, 266)
+
+# Pie chart
+pie(piedata, labels = rank)
